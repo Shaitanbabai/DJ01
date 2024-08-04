@@ -1,0 +1,28 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
+    {% block title %}
+
+    {% endblock %}
+
+</head>
+<body>
+
+    <aside>
+    {% include 'main/nav.html' %}
+    </aside>
+
+    <main>
+
+
+    </main>
+
+    {% block content%}
+
+    {% endblock %}
+
+</body>
+</html>
