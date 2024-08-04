@@ -4,6 +4,6 @@ from . import views  # импортируем обработчик шаблон�
 urlpatterns = [
     path('', views.index),
     path('new', views.new),
-    path('data', views.new),
-    path('test', views.new),
+    path('data', views.data),
+    path('test', views.test),
 ]
