@@ -1,28 +1,31 @@
-{% load static %}
 <!DOCTYPE html>
+{% load static %}
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{% static 'main/css/main.css' %}">
     {% block title %}
-
     {% endblock %}
-
 </head>
 <body>
-
-    <aside>
-    {% include 'main/nav.html' %}
-    </aside>
-
-    <main>
-
-
-    </main>
-
-    {% block content%}
-
-    {% endblock %}
-
+    <header class="header">
+        <span>DjangoBorsch</span>
+        <img src="{% static 'main/image/SmBh.png' %}" alt="Сметанат борща">
+    </header>
+    <div class="separator"></div>
+    <div class="layout">
+        <aside>
+            {% include 'main/nav.html' %}
+        </aside>
+        <main class="content">
+            {% block content %}
+            {% endblock %}
+        </main>
+    </div>
+    <footer class="footer">
+        <p>Contact us at: contact@django-borsch.com</p>
+        <p>Working hours: Mon-Fri 9:00 - 18:00</p>
+    </footer>
 </body>
 </html>
