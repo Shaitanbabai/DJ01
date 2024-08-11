@@ -1,0 +1,45 @@
+{% extends 'main/layout.html' %}
+
+{% block title %}
+    <title>Страница добавления новостей</title>
+{% endblock %}
+
+{% block content %}
+<h3>Форма для добавления новостей</h3>
+<div>
+    <div class="container mt-5">
+        <form method="post">
+            {% csrf_token %}
+            {% if form.errors %}
+                <div class="alert alert-danger">
+                    <ul>
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <li>{{ field.label }}: {{ error }}</li>
+                            {% endfor %}
+                        {% endfor %}
+                        {% for error in form.non_field_errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    </ul>
+                </div>
+            {% endif %}
+            <div class="mb-3">
+                {{ form.title }}
+            </div>
+
+            <br>
+            <div class="mb-3">
+                {{ form.short_description }}
+            </div>
+            <br>
+            <div class="mb-3">
+                {{ form.text }}
+            </div>
+            <br>
+            <button type="submit" class="btn btn-primary">Добавить новость</button>
+        </form>
+    </div>
+</div>
+
+{% endblock %}

@@ -3,4 +3,5 @@ from . import views  # импортируем обработчик шаблон�
 
 urlpatterns = [
     path('', views.home, name='news_home'),
+    path('create_news/', views.create_news, name='create_news'),
 ]

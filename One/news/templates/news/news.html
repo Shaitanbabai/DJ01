@@ -5,28 +5,56 @@
 {% endblock %}
 
 {% block content %}
-    <h1>Тут всякие новости</h1>
-
-    {% for new in news %}
-      <div>
-        <h3>{{ new.title }}</h3>
-        <p>Автор: {{ new.author.username }}</p>
-        <p>Опубликовано: {{ new.pub_date }}</p>
-        <p onclick="toggleDescription(this)" data-full-text="{{ new.text }}">
-            {{ new.short_description }}
-        </p>
-      </div>
-    {% endfor %}
+<h1>Тут всякие новости</h1>
+    {% if news|length > 0 %}
+        {% for new in news %}
+          <div class="mb-3">
+            <h3>{{ new.title }}</h3>
+            <div style="display: flex; align-items: center; font-size: 0.7em; font-style: italic;">
+                <p style="margin-right: 10px;">Автор: {{ new.author.username }}</p>
+                <p>Опубликовано: {{ new.pub_date }}</p>
+            </div>
+            <p class="toggle-text" onclick="toggleDescription(this)" data-full-text="{{ new.text }}"
+               data-short-text="{{ new.short_description }}">
+                {{ new.short_description }}
+                <span class="toggle-indicator">[Показать больше]</span>
+            </p>
+          </div>
+        {% endfor %}
+    {% else %}
+        <h4> Пока новостей нет </h4>
+    {% endif %}
 
     <script>
         function toggleDescription(element) {
             const fullText = element.getAttribute('data-full-text');
-            if (element.innerText === fullText) {
-                element.innerText = element.getAttribute('data-short-text');
+            const shortText = element.getAttribute('data-short-text');
+            const indicator = element.querySelector('.toggle-indicator');
+            const isExpanded = element.classList.toggle('expanded');
+
+            if (isExpanded) {
+                element.firstChild.nodeValue = fullText;
+                indicator.textContent = '[Показать меньше]';
             } else {
-                element.setAttribute('data-short-text', element.innerText);
-                element.innerText = fullText;
+                element.firstChild.nodeValue = shortText;
+                indicator.textContent = '[Показать больше]';
             }
         }
     </script>
+
+    <style>
+        .toggle-text {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .toggle-text.expanded {
+            background-color: #FF6AB6;
+        }
+        .toggle-indicator {
+            margin-left: 5px;
+            font-size: 0.7em; /* 30% меньше основного текста */
+            font-style: italic; /* курсив */
+            font-weight: normal; /* убираем жирность, если есть */
+        }
+    </style>
 {% endblock %}
